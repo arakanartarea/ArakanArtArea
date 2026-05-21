@@ -1,1 +1,255 @@
-[]
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ကိုကို့အကြောင်း (Developer Profile)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-color: #ff5252;
+            --input-bg: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif, "Pyidaungsu", "Myanmar3";
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ပရိုဖိုင် ကတ်ပြားတစ်ခုလုံး */
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ပရိုဖိုင်ပုံစံစက်ဝိုင်း */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            padding: 3px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .status-dot {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 18px;
+            height: 18px;
+            background: #10b981;
+            border: 3px solid #1e1b4b;
+            border-radius: 50%;
+        }
+
+        /* အမည်နှင့် အချက်အလက်များ */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .title-sub {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* ဆိုရှယ်မီဒီယာ အိုင်ကွန်များ */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 82, 82, 0.3);
+            border-color: transparent;
+        }
+
+        /* လျှို့ဝှက်မှတ်စု အပိုင်း (Secret Note Place) */
+        .secret-note-section {
+            border-top: 1px solid var(--card-border);
+            padding-top: 25px;
+            text-align: left;
+        }
+
+        .note-title {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .note-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .note-input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .note-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(255, 82, 82, 0.15);
+        }
+
+        .note-input-container i {
+            position: absolute;
+            right: 15px;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .note-input-container i:hover {
+            color: var(--accent-color);
+        }
+
+        /* Back Button (မူလ Website သို့ ပြန်သွားရန်) */
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .back-btn:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-card">
+    <div class="avatar-container">
+        <img src="https://media.tenor.com/_EreiMKqzs4AAAAj/arakan-flag-rakhine-flag.gif" alt="Avatar" class="avatar">
+        <div class="status-dot"></div>
+    </div>
+
+    <h1>ကိုကို</h1>
+    <div class="title-sub">Arakan Art Area Developer</div>
+    <p class="bio">အာရက္ခ အနုပညာ နယ်မြီ (ရခိုင်အနုပညာမှတ်တမ်း) ဝဘ်ဆိုက်အား ဖန်တီးပြုစုသူ ဖြစ်ပါသည်။ ရခိုင်သီချင်းများနှင့် အနုပညာလက်ရာများကို တစ်နေရာတည်းတွင် စနစ်တကျ ထိန်းသိမ်းနိုင်ရန် ကြိုးစားနေပါသည်။</p>
+
+    <div class="social-links">
+        <a href="https://facebook.com/" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://t.me/" target="_blank" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://github.com/" target="_blank" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://youtube.com/" target="_blank" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="secret-note-section">
+        <div class="note-title">
+            <i class="fas fa-lock"></i> လျှို့ဝှက်မှတ်စု (Secret Note)
+        </div>
+        <div class="note-input-container">
+            <input type="password" class="note-input" id="secretNoteInput" placeholder="စကားဝှက်ရိုက်ထည့်ပြီး မှတ်စုဖတ်ရန်...">
+            <i class="fas fa-eye" id="toggleVisibility" onclick="toggleNoteVisibility()"></i>
+        </div>
+    </div>
+
+    <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> နောက်သို့ ပြန်သွားရန်</a>
+</div>
+
+<script>
+    // လျှို့ဝှက်ချက်ဖြစ်လို့ စာသားအဖွင့်အပိတ် လုပ်ကြည့်နိုင်မယ့် function လေးထည့်ပေးထားပါတယ်
+    function toggleNoteVisibility() {
+        const input = document.getElementById('secretNoteInput');
+        const icon = document.getElementById('toggleVisibility');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
+
+</body>
+</html>

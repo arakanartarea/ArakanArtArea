@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>အကြောင်း (Developer Profile)</title>
+    <title>အကြောင်း (Arakan Art Anthology Profile)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            --card-bg: rgba(255, 255, 255, 0.07);
+            --card-bg: rgba(255, 255, 255, 0.05);
             --card-border: rgba(255, 255, 255, 0.1);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-            --accent-color: #ff5252;
-            --input-bg: rgba(0, 0, 0, 0.2);
+            --accent-red: #ff5252;
+            --accent-blue: #3b82f6;
+            --input-bg: rgba(0, 0, 0, 0.3);
+            --item-bg: rgba(255, 255, 255, 0.03);
         }
 
         * {
@@ -29,24 +31,20 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding: 20px 10px;
             overflow-x: hidden;
         }
 
-        /* ပရိုဖိုင် ကတ်ပြားတစ်ခုလုံး */
-        .profile-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 35px 25px;
+        /* နေရာအချိုးအစား ကွန်တိန်နာ (PC မှာ ဘေးချင်းယှဉ်ဖို့) */
+        .page-container {
             width: 100%;
-            max-width: 420px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
             animation: fadeIn 0.8s ease-out;
+            margin-top: 10px;
         }
 
         @keyframes fadeIn {
@@ -54,70 +52,149 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ပရိုဖိုင်ပုံစံစက်ဝိုင်း */
-        .avatar-container {
+        /* အပေါ်ဆုံး MV ခေါင်းစည်းစာတန်း */
+        .mv-header {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* စာသားရွေ့လျားမှုစနစ် */
+        .scrolling-text-box {
+            display: flex;
+            flex-direction: column;
+            height: 45px;
+            overflow: hidden;
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+        }
+
+.scrolling-text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    animation: slideUp 12s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+        .text-item {
+            height: 45px;
+            line-height: 45px;
+            font-weight: bold;
+            font-size: clamp(14px, 4vw, 18px);
+            white-space: nowrap;
+        }
+        .text-blue { color: #60a5fa; font-weight: 700; }
+        .text-red { color: #ff6b6b; font-weight: 800; }
+
+        /* Animation ကို 12s လို့ ပြောင်းပေးပါ */
+
+
+/* လုံးဝ အပေါ်ပဲ အဆက်မပြတ် တက်နေမည့် Animation စနစ် */
+/* လုံးဝ အပေါ်ပဲ မနားတမ်း တက်နေပြီး အောက်ကို ပြန်မဆင်းမည့် စနစ်အမှန် */
+/* အချိန်ကို မျှမျှတတ ညှိထားသော Animation စနစ် */
+@keyframes slideUp {
+    /* ၁။ ပထမစာကြောင်း ပြသချိန် (ကြာချိန် ၂၈.၃% + ရွေ့ချိန် ၅%) */
+    0%, 28.3% { transform: translateY(0); }
+    
+    /* ၂။ ဒုတိယစာကြောင်း ပြသချိန် (ကြာချိန် ၂၈.၃% + ရွေ့ချိန် ၅%) */
+    33.3%, 61.6% { transform: translateY(-45px); }
+    
+    /* ၃။ တတိယစာကြောင်း ပြသချိန် (ကြာချိန် ၂၈.၃%) */
+    66.6%, 94.9% { transform: translateY(-90px); }
+    
+    /* ၉၄.၉% ကနေ ၉၉.၉% (၅% အချိန်) အတွင်းမှာ ၃ ကနေ ၁ ကို အရှိန်မှန်မှန်နဲ့ ဆက်တက်ခိုင်းလိုက်တာ (ဒါဆိုရင် ၄ မလိုတော့ဘူး) */
+    99.9% { transform: translateY(-135px); }
+    
+    /* ၁၀၀% ရောက်တာနဲ့ အရှိန်ဖျောက်ပြီး ထိပ်ဆုံးကို ဖြတ်ခနဲ ခုန်ကူးမယ် */
+    99.91% { 
+        transform: translateY(-135px); 
+        animation-timing-function: steps(1); 
+    }
+    100% { 
+        transform: translateY(0); 
+    }
+}
+
+
+
+
+        /* ပရိုဖိုင် အဓိကကတ်ပြား */
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* နှစ်ထပ်ကွင်း ပရိုဖိုင်ပုံ */
+        .avatar-container {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+            padding: 2px;
+            background: #fff;
+            border: 2px solid var(--accent-red);
+            box-shadow: inset 0 0 0 2px var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .avatar {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-color);
-            padding: 3px;
-            background: rgba(255,255,255,0.1);
+            object-fit: contain;
         }
 
-        .status-dot {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 18px;
-            height: 18px;
-            background: #10b981;
-            border: 3px solid #1e1b4b;
-            border-radius: 50%;
-        }
-
-        /* အမည်နှင့် အချက်အလက်များ */
         h1 {
-            font-size: 24px;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
+            font-size: 22px;
+            margin-bottom: 4px;
         }
 
         .title-sub {
-            color: var(--accent-color);
-            font-size: 14px;
+            color: var(--accent-red);
+            font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             letter-spacing: 1px;
         }
 
-        .bio {
-            color: var(--text-sub);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            padding: 0 10px;
+        /* ဘယ်ညာ Scroll တန်း အခြေခံဒီဇိုင်း */
+        .horizontal-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 5px 15px;
+            margin-bottom: 20px;
+            scrollbar-width: none; /* Firefox အတွက် */
+        }
+        
+        .horizontal-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari အတွက် ဘားဖျောက်နည်း */
         }
 
-        /* ဆိုရှယ်မီဒီယာ အိုင်ကွန်များ */
-        .social-links {
-            display: flex;
-            justify-content: center;
+        .scroll-wrapper {
+            display: inline-flex;
             gap: 15px;
-            margin-bottom: 30px;
         }
 
-        .social-icon {
-            width: 45px;
-            height: 45px;
+        /* ဆိုရှယ်မီဒီယာခလုတ် ၁၀ ခု အတန်း */
+        .social-btn {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--card-border);
@@ -125,35 +202,126 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
+            font-size: 20px;
             text-decoration: none;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
-        .social-icon:hover {
-            background: var(--accent-color);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(255, 82, 82, 0.3);
-            border-color: transparent;
+        .social-btn:hover {
+            transform: translateY(-3px);
+            background: var(--accent-blue);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
-        /* လျှို့ဝှက်မှတ်စု အပိုင်း (Secret Note Place) */
-        .secret-note-section {
-            border-top: 1px solid var(--card-border);
-            padding-top: 25px;
+        /* အကော်ဒီယန် List အပိုင်း (Expand/Collapse) */
+        .accordion-section {
             text-align: left;
+            margin-bottom: 25px;
         }
 
-        .note-title {
+        .accordion-item {
+            background: var(--item-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .accordion-header i {
+            transition: transform 0.3s;
+            color: var(--text-sub);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.6;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .accordion-content p {
+            padding: 15px;
+        }
+
+        /* Active ဖြစ်ချိန် စတိုင် (ဖွင့်လိုက်ရင် သက်ရောက်မည့် စတိုင်) */
+        .accordion-item.active .accordion-content {
+            max-height: 500px; /* စာသားအရှည်ပေါ်မူတည်ပြီး အဆင်ပြေစေရန် */
+            border-top: 1px solid var(--card-border);
+        }
+
+        .accordion-item.active .accordion-header {
+            color: var(--accent-red);
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+            color: var(--accent-red);
+        }
+
+        /* ဝဘ်ဆိုက်ညွှန်းခလုတ်များ Scroll တန်း */
+        .web-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--item-bg);
+            border: 1px solid var(--card-border);
+            padding: 12px 20px;
+            border-radius: 14px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .web-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--accent-red);
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.15);
+        }
+
+        .web-card i {
+            font-size: 18px;
+            color: var(--accent-red);
+        }
+
+        /* လျှို့ဝှက်မှတ်စု အပိုင်း */
+        .secret-section {
+            border-top: 1px solid var(--card-border);
+            padding-top: 20px;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .secret-title {
             font-size: 13px;
             color: var(--text-sub);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .note-input-container {
+        .input-box {
             position: relative;
             display: flex;
             align-items: center;
@@ -168,74 +336,221 @@
             color: var(--text-main);
             font-size: 14px;
             outline: none;
-            transition: all 0.3s ease;
         }
 
-        .note-input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(255, 82, 82, 0.15);
-        }
-
-        .note-input-container i {
+        .input-box i {
             position: absolute;
             right: 15px;
             color: var(--text-sub);
             cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .note-input-container i:hover {
-            color: var(--accent-color);
         }
 
-        /* Back Button (မူလ Website သို့ ပြန်သွားရန်) */
         .back-btn {
             display: inline-block;
-            margin-top: 25px;
+            margin-top: 15px;
             color: var(--text-sub);
             text-decoration: none;
             font-size: 13px;
-            transition: color 0.2s;
         }
-        .back-btn:hover {
-            color: var(--text-main);
+
+        /* ==========================================
+           💻 PC View (PV) အတွက် Layout ခွဲခြားခြင်း စနစ်
+           ========================================== */
+        @media (min-width: 768px) {
+            body {
+                align-items: center;
+                padding: 40px 20px;
+            }
+
+            .page-container {
+                flex-direction: row; /* ဘေးချင်းယှဉ်မယ် */
+                align-items: stretch;
+            }
+
+            /* ဘယ်ဘက်ခြမ်း (ပရိုဖိုင်ကတ်ပြား) */
+            .profile-card {
+                flex: 1;
+                max-width: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            /* ညာဘက်ခြမ်း (အကော်ဒီယန်နဲ့ တခြားအရာများအတွက် ကတ်ပြားအသစ်) */
+            .right-panel {
+                flex: 1.5;
+                background: var(--card-bg);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--card-border);
+                border-radius: 24px;
+                padding: 30px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            /* PV မှာ အကော်ဒီယန်ကို အမြဲတမ်း အကုန်လုံး ဖွင့်ပြထားမည့်စနစ် */
+            .pv-all-open .accordion-content {
+                max-height: 500px !important;
+                border-top: 1px solid var(--card-border);
+            }
+            .pv-all-open .accordion-header {
+                pointer-events: none; /* နှိပ်လို့မရအောင် ပိတ်ထားမယ် */
+                color: var(--accent-red);
+            }
+            .pv-all-open .accordion-header i {
+                transform: rotate(180deg);
+                color: var(--accent-red);
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="profile-card">
-    <div class="avatar-container">
-        <img src="https://media.tenor.com/_EreiMKqzs4AAAAj/arakan-flag-rakhine-flag.gif" alt="Avatar" class="avatar">
-        <div class="status-dot"></div>
-    </div>
-
-    <h1>ကိုကို</h1>
-    <div class="title-sub">Arakan Art Area Developer</div>
-    <p class="bio">အာရက္ခ အနုပညာ နယ်မြီ (ရခိုင်အနုပညာမှတ်တမ်း) ဝဘ်ဆိုက်အား ဖန်တီးပြုစုသူ ဖြစ်ပါသည်။ ရခိုင်သီချင်းများနှင့် အနုပညာလက်ရာများကို တစ်နေရာတည်းတွင် စနစ်တကျ ထိန်းသိမ်းနိုင်ရန် ကြိုးစားနေပါသည်။</p>
-
-    <div class="social-links">
-        <a href="https://facebook.com/" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://t.me/" target="_blank" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-        <a href="https://github.com/" target="_blank" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://youtube.com/" target="_blank" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
-    </div>
-
-    <div class="secret-note-section">
-        <div class="note-title">
-            <i class="fas fa-lock"></i> လျှို့ဝှက်မှတ်စု (Secret Note)
+<div class="page-container">
+    
+    <div class="profile-card">
+        
+        <div class="mv-header" style="margin-bottom: 20px;">
+            <div class="scrolling-text-box">
+                <div class="scrolling-text">
+                    <span class="text-item"><span class="text-blue">Arakan Art</span> <span class="text-red">Area</span></span>
+                    <span class="text-item"><span class="text-blue">အာရက္ခ အနုပညာ</span> <span class="text-red">နယ်မြီ</span></span>
+                    <span class="text-item"><span class="text-blue">ရခိုင် အနုပညာ</span> <span class="text-red">နယ်မြေ</span></span>
+                    <span class="text-item"><span class="text-blue">Arakan Art</span> <span class="text-red">Area</span></span>
+                </div>
+            </div>
         </div>
-        <div class="note-input-container">
-            <input type="password" class="note-input" id="secretNoteInput" placeholder="စကားဝှက်ရိုက်ထည့်ပြီး မှတ်စုဖတ်ရန်...">
-            <i class="fas fa-eye" id="toggleVisibility" onclick="toggleNoteVisibility()"></i>
+
+        <div class="avatar-container">
+            <img src="https://raw.githubusercontent.com/arakanartarea/ArakanArtArea/main/Image/ArakanArtArea_Profile_Icon.png" alt="Avatar" class="avatar">
         </div>
+
+        <h1>ခိုင်လှဝင်း</h1>
+        <div class="title-sub">Arakan Art Area Developer</div>
+
+        <div class="horizontal-scroll-container">
+            <div class="scroll-wrapper">
+                <a href="https://facebook.com/" target="_blank" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://t.me/" target="_blank" class="social-btn" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://github.com/" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://youtube.com/" target="_blank" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://tiktok.com/" target="_blank" class="social-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://instagram.com/" target="_blank" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:arakanartarea@gmail.com" class="social-btn" title="Gmail"><i class="far fa-envelope"></i></a>
+                <a href="https://twitter.com/" target="_blank" class="social-btn" title="X"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://vimeo.com/" target="_blank" class="social-btn" title="Vimeo"><i class="fab fa-vimeo-v"></i></a>
+            </div>
+        </div>
+
+        <div class="secret-section">
+            <div class="secret-title"><i class="fas fa-lock"></i> လျှို့ဝှက်မှတ်စု (Secret Note)</div>
+            <div class="input-box">
+                <input type="password" class="note-input" id="secretNoteInput" placeholder="စကားဝှက်ရိုက်ထည့်ပြီး မှတ်စုဖတ်ရန်...">
+                <i class="fas fa-eye" id="toggleVisibility" onclick="toggleNoteVisibility()"></i>
+            </div>
+        </div>
+
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> နောက်သို့ ပြန်သွားရန်</a>
     </div>
 
-    <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> နောက်သို့ ပြန်သွားရန်</a>
+    <div class="right-panel">
+        
+        <div class="accordion-section" id="accordionContainer">
+            
+            <div class="accordion-item active"> <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-info-circle" style="margin-right: 8px;"></i> အကြောင်းအရာ</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>အာရက္ခ အနုပညာ နယ်မြီ (ရခိုင်အနုပညာမှတ်တမ်း) ဝဘ်ဆိုက်အား ဖန်တီးပြုစုသူ ဖြစ်ပါသည်။ ရခိုင်သီချင်းများနှင့် အနုပညာလက်ရာများကို တစ်နေရာတည်းတွင် စနစ်တကျ ထိန်းသိမ်းနိုင်ရန် ကြိုးစားနေပါသည်။</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-pen-nib" style="margin-right: 8px;"></i> ရေးသားသူ</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>အမည် - ခိုင်လှဝင်း<br>ဝါသနာ - Web Development ပြုလုပ်ခြင်းနှင့် ရိုးရာယဉ်ကျေးမှု ဂီတအနုပညာများကို စနစ်တကျ မော်ကွန်းတင် ထိန်းသိမ်းခြင်း။</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span><i class="fas fa-user-graduate" style="margin-right: 8px;"></i> ကိုယ်ရေးအကျဉ်း</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>နည်းပညာပိုင်းကို ကိုယ်တိုင်လေ့လာဆန်းသစ်နေသူ (Self-taught Developer) တစ်ဦးဖြစ်ပြီး၊ မိမိတို့၏ အဖိုးတန်ရတနာများ ပျောက်ပျက်မသွားစေရန် အနုပညာအမွေအနှစ်များကို ဒီဂျစ်တယ်ခေတ်စနစ်အတိုင်း မှတ်တမ်းတင်ရန် ကြိုးပမ်းနေသူ ဖြစ်ပါသည်။</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: left;">
+            <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 8px; font-weight: bold; padding-left: 5px;">
+                <i class="fas fa-link"></i> ကျွန်ုပ်၏ ဝဘ်ဆိုက်များ (Websites)
+            </div>
+            <div class="horizontal-scroll-container" style="padding-bottom: 5px; margin-bottom: 0;">
+                <div class="scroll-wrapper">
+                    <a href="https://arakanartarea.github.io/AAA-NotePL/AAA/AAA_Index.html" class="web-card">
+                        <i class="fas fa-music"></i> Arakan Art Area သီချင်းစာမျက်နှာ
+                    </a>
+                    <a href="#" class="web-card">
+                        <i class="fas fa-archive"></i> Arakan Art Anthology Archive
+                    </a>
+                    <a href="#" class="web-card">
+                        <i class="fas fa-gem"></i> All Arakan Assets
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
-    // လျှို့ဝှက်ချက်ဖြစ်လို့ စာသားအဖွင့်အပိတ် လုပ်ကြည့်နိုင်မယ့် function လေးထည့်ပေးထားပါတယ်
+    // 📱 Mobile View (MV) အတွက် အကော်ဒီယန် ဖွင့်/ပိတ် Logic
+    function toggleAccordion(header) {
+        // PC View (မျက်နှာပြင် အကျယ် 768px ထက်ကြီးရင်) နှိပ်လို့မရအောင် ပိတ်ပြီး အကုန်ဖွင့်ထားမည်
+        if (window.innerWidth >= 768) return;
+
+        const currentItem = header.parentElement;
+        const container = document.getElementById('accordionContainer');
+        const items = container.getElementsByClassName('accordion-item');
+
+        // တစ်ခုဖွင့်ရင် တခြားဟာတွေအကုန် လိုက်ပိတ်မည့်စနစ်
+        for (let item of items) {
+            if (item !== currentItem) {
+                item.classList.remove('active');
+            }
+        }
+
+        // လက်ရှိနှိပ်လိုက်တဲ့ကောင်ကို ဖွင့်/ပိတ်လုပ်ခြင်း
+        currentItem.classList.toggle('active');
+    }
+
+    // 💻 PC View (PV) မှာ အကော်ဒီယန်အားလုံးကို အလိုအလျောက် ဖွင့်ပေးထားမည့်စနစ်
+    function handleResponsiveLayout() {
+        const container = document.getElementById('accordionContainer');
+        if (window.innerWidth >= 768) {
+            container.classList.add('pv-all-open');
+        } else {
+            container.classList.remove('pv-all-open');
+        }
+    }
+
+    // စတင် Run ချိန်နှင့် Screen အကျယ်အပြောင်းအလဲလုပ်ချိန်မှာ စစ်ဆေးရန်
+    window.addEventListener('load', handleResponsiveLayout);
+    window.addEventListener('resize', handleResponsiveLayout);
+
+    // လျှို့ဝှက်ချက် စာသား အဖွင့်အပိတ် ပြုလုပ်ခြင်း
     function toggleNoteVisibility() {
         const input = document.getElementById('secretNoteInput');
         const icon = document.getElementById('toggleVisibility');
